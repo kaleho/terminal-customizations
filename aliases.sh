@@ -28,7 +28,6 @@ alias aptup="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
 
 alias extip="curl -k -4 ip.sb"
 
-alias gid-dfin="git config --global user.email \"raymond.kaleho@dfinsolutions.com\"; git config --global user.name \"Raymond Kaleho\""
 alias gid-klho="git config --global user.email \"ray@kaleho.com\"; git config --global user.name \"Raymond A. Kaleho\""
 
 alias roam="$HOME/syncs/github/kaleho/roaming-terminal/roam"
