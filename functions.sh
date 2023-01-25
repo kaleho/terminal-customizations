@@ -9,6 +9,7 @@ function fwd() {
 
 function jump() {
   pushd ~
+  # This is a push only, do not delete anything from the target
   rsync -avz .bash_aliases customizations $1:.
   ssh $1
   popd
