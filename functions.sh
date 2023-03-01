@@ -1,6 +1,6 @@
 function fwd() {
   pushd ~
-  rsync -avz .bash_aliases customizations $1:.
+  push $1
   ssh -D 5534 $1
   popd
 
@@ -9,8 +9,7 @@ function fwd() {
 
 function jump() {
   pushd ~
-  # This is a push only, do not delete anything from the target
-  rsync -avz .bash_aliases customizations $1:.
+  push $1
   ssh $1
   popd
 
@@ -83,6 +82,11 @@ function bhu() { # bhu - bastion host unmount
   ls -lah ~/bastion_hosts
 
   return 0
+}
+
+function push() {
+  # This is a push only, do not delete anything from the target
+  rsync -avz .bash_aliases .tmux customizations $1:.
 }
 
 function rbh() { # rmb - roam begin here
