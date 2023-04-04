@@ -4,6 +4,10 @@ alias azas="az account show"
 alias azl="az login --use-device-code && az account show"
 alias azll="az logout && az login --use-device-code && az account show"
 
+alias d="docker"
+alias de="docker exec -it"
+alias dl="docker exec -it $(echo $USER)_dev zsh"
+
 alias dn="dotnet"
 
 alias extip="curl -k -4 ip.sb"
@@ -11,6 +15,13 @@ alias extip="curl -k -4 ip.sb"
 alias gid-klho="git config --global user.email \"ray@kaleho.com\"; git config --global user.name \"Raymond A. Kaleho\""
 
 alias k="kubectl"
+alias kd="kubectl describe"
+alias kdd="kubectl describe deploy"
+alias kdp="kubectl describe pod"
+alias kg="kubectl get"
+alias kgd="kubectl get deploy"
+alias kgp="kubectl get pod"
+alias kl="kubectl logs"
 alias kns="kubens"
 alias ktx="kubectx"
 
