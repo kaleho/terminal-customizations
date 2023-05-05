@@ -32,6 +32,9 @@ alias roam="$HOME/syncs/github/kaleho/roaming-terminal/roam"
 alias rs="rsync -avzh --delete"
 alias rsn="rsync -avzh -n --delete"
 
+alias sst="sudo service ssh start && sudo netstat -tlnp | grep 22"
+alias ssp="sudo service ssh stop && sudo netstat -tlnp | grep 22"
+
 alias tf="terraform"
 alias tfa="terraform apply"
 alias tfd="terraform destroy"
@@ -42,3 +45,6 @@ alias tga="terragrunt apply"
 alias tgd="terragrunt destroy"
 alias tgi="terragrunt init"
 alias tgv="terragrunt validate"
+
+alias version="lsb_release -a"
+alias vmmnt="/usr/bin/vmhgfs-fuse .host:/ /home/$USER/mnt -o subtype=vmhgfs-fuse,allow_other"
