@@ -27,7 +27,7 @@ alias ktx="kubectx"
 
 alias ll="ls -la"
 
-alias roam="$HOME/syncs/github/kaleho/roaming-terminal/roam"
+alias roam="$HOME/.roaming-terminal/roam"
 
 alias rs="rsync -avzh --delete"
 alias rsn="rsync -avzh -n --delete"

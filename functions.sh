@@ -86,15 +86,20 @@ function bhu() { # bhu - bastion host unmount
 
 function push() {
   # This is a push only, do not delete anything from the target
-  rsync -avz .bash_aliases .tmux customizations $1:.
+  rsync -avz .bash_aliases .tmux .roaming-terminal customizations --exclude='**/.git/' $1:.
 }
 
 function rbh() { # rmb - roam begin here
-  ~/syncs/github/kaleho/roaming-terminal/roam start $(echo $USER$(pwd) | sed "s|/|_|g")
+  ~/.roaming-terminal/roam start $(echo $USER$(pwd) | sed "s|/|_|g")
 }
 
 function reh() { # rme - roam end here
-  ~/syncs/github/kaleho/roaming-terminal/roam stop $(echo $USER$(pwd) | sed "s|/|_|g")
+  ~/.roaming-terminal/roam stop $(echo $USER$(pwd) | sed "s|/|_|g")
+}
+
+function srt() {
+  mkdir ~/.roaming-terminal
+  rsync -avz --exclude='**/.git/' ~/syncs/github/kaleho/roaming-terminal/ ~/.roaming-terminal/
 }
 
 function ssa { # ssa - start ssh agent
@@ -121,6 +126,10 @@ function ssa { # ssa - start ssh agent
 
 function sse() { # sse - set ssh environment
   # setup the ssh-agent
+  if [ "reset" = "$1" ]; then
+    rm $HOME/.ssh/environment
+  fi
+
   SSH_ENV=$HOME/.ssh/environment
 
   # start the ssh-agent
