@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# if tpm directory does not exist then clone it
+if [ ! -d ~/.tmux/plugins/tpm ]; then
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
+
 cat << EOT > ~/.tmux.conf
 # Reference: https://www.hamvocke.com/blog/a-guide-to-customizing-your-tmux-conf/
 
