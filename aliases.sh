@@ -14,6 +14,8 @@ alias extip="curl -k -4 ip.sb"
 
 alias gid-klho="git config --global user.email \"ray@kaleho.com\"; git config --global user.name \"Raymond A. Kaleho\""
 
+alias go-notes="cd /home/user01/onedrive/kaleho/ray-personal/notes/church-notes/2023"
+
 alias k="kubectl"
 alias kd="kubectl describe"
 alias kdd="kubectl describe deploy"
@@ -45,6 +47,8 @@ alias tga="terragrunt apply"
 alias tgd="terragrunt destroy"
 alias tgi="terragrunt init"
 alias tgv="terragrunt validate"
+
+alias nvim="$HOME/neovim/bin/nvim"
 
 alias version="lsb_release -a"
 alias vmmnt="/usr/bin/vmhgfs-fuse .host:/ /home/$USER/mnt -o subtype=vmhgfs-fuse,allow_other"
