@@ -12,6 +12,8 @@ alias dn="dotnet"
 
 alias extip="curl -k -4 ip.sb"
 
+alias glogin="gcloud auth login --no-launch-browser"
+
 alias gid-klho="git config --global user.email \"ray@kaleho.com\"; git config --global user.name \"Raymond A. Kaleho\""
 
 alias go-notes="cd /home/user01/onedrive/kaleho/ray-personal/notes/church-notes/2023"

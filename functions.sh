@@ -84,6 +84,10 @@ function bhu() { # bhu - bastion host unmount
   return 0
 }
 
+function fixdocker() {
+  sudo chmod 666 /var/run/docker.sock
+}
+
 function push() {
   # This is a push only, do not delete anything from the target
   rsync -avz .bash_aliases .tmux .roaming-terminal customizations --exclude='**/.git/' $1:.
@@ -143,6 +147,12 @@ function sse() { # sse - set ssh environment
   fi
 
   return 0
+}
+
+function startssh() {
+  sudo sed -i 's/#Port 22/Port 11022/g' /etc/ssh/sshd_config
+
+  sudo service ssh start
 }
 
 sse
