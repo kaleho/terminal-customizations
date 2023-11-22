@@ -91,7 +91,7 @@ function devdown() {
 function devup() {
   srt
 
-  ~/.roaming-terminal/roam "--network host -v /mnt:/mnt" dev
+  ~/.roaming-terminal/roam "--restart unless-stopped --network host -v /mnt:/mnt" dev
   
   # Run the following commands as the root user (-u 0)
 
