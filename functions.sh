@@ -88,10 +88,17 @@ function devdown() {
   ~/.roaming-terminal/roam stop dev
 }
 
+function devfix() {
+  sudo service ssh start
+
+  sudo chmod 666 /var/run/docker.sock
+}
+
 function devup() {
   srt
 
-  ~/.roaming-terminal/roam "--restart unless-stopped --network host -v /mnt:/mnt" dev
+  # ~/.roaming-terminal/roam "--restart unless-stopped --network host -v /mnt:/mnt" dev
+  ~/.roaming-terminal/roam "--restart unless-stopped -p 11022:11022 -v /mnt:/mnt" dev
   
   # Run the following commands as the root user (-u 0)
 
@@ -173,5 +180,13 @@ function startssh() {
   sudo service ssh start
 }
 
+function stripeup() {
+  mkdir ~/.stripe
+  docker run --name stripe --restart unless-stopped -d stripe/stripe-cli:latest 
+}
+
+function stripedown() {
+  docker rm -f stripe
+}
 
 sse
