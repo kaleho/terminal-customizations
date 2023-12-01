@@ -113,6 +113,65 @@ function fixdocker() {
   sudo chmod 666 /var/run/docker.sock
 }
 
+function github_install() {
+    if [[ "$DEBUG_LEVEL" == "1" ]]; then
+        echo $1
+        echo $2
+        echo $3
+    fi
+
+    URL=$(gh release view --repo $2 --json assets --jq '.assets.[] | select(.name|test("'$3'")) | .url')
+    echo Installing: $URL
+    sudo wget -q -O $1 ${URL}
+    chmod +x $1
+}
+
+function github_install_deb() {
+    if [[ "$DEBUG_LEVEL" == "1" ]]; then
+        echo $1
+        echo $2
+    fi
+
+    URL=$(gh release view --repo $1 --json assets --jq '.assets.[] | select(.name|test("'$2'")) | .url')
+    echo Installing: $URL
+    wget -q -O package.deb ${URL}
+    sudo dpkg -i package.deb
+    rm package.deb
+}
+
+function github_install_tar() {
+    if [[ "$DEBUG_LEVEL" == "1" ]]; then
+        echo $1
+        echo $2
+        echo $3
+    fi
+
+    URL=$(gh release view --repo $2 --json assets --jq '.assets.[] | select(.name|test("'$3'")) | .url')
+    echo Installing: $URL
+    echo
+    wget -q -O archive.tgz ${URL}
+    sudo tar xzvf archive.tgz --directory $1
+    rm archive.tgz
+}
+
+function github_install_zip() {
+    if [[ "$DEBUG_LEVEL" == "1" ]]; then
+        echo $1
+        echo $2
+        echo $3
+    fi
+
+    URL=$(gh release view --repo $2 --json assets --jq '.assets.[] | select(.name|test("'$3'")) | .url')
+    echo Installing: $URL
+    wget -q -O archive.zip ${URL}
+    sudo unzip -j archive.zip -d $1
+    rm archive.zip
+}
+
+function install_stripe() {
+  github_install_tar "/usr/local/bin" "stripe/stripe-cli" $(echo "linux_x86_64.tar.gz$")
+}
+
 function push() {
   # This is a push only, do not delete anything from the target
   rsync -avz .bash_aliases .tmux .roaming-terminal customizations --exclude='**/.git/' $1:.
@@ -180,13 +239,14 @@ function startssh() {
   sudo service ssh start
 }
 
-function stripeup() {
-  mkdir ~/.stripe
-  docker run --name stripe --restart unless-stopped -d stripe/stripe-cli:latest 
-}
-
 function stripedown() {
-  docker rm -f stripe
+  ~/.roaming-terminal/roam stop stripe
 }
 
-sse
+function stripeup() {
+  srt 
+
+  ~/.roaming-terminal/roam "--restart unless-stopped" stripe
+  
+  ~/.roaming-terminal/roam join stripe
+}
