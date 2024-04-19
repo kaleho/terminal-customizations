@@ -7,6 +7,7 @@ alias azll="az logout && az login --use-device-code && az account show"
 alias d="docker"
 alias de="docker exec -it"
 alias dl="docker exec -it $(echo $USER)_dev zsh"
+alias dps='docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}"'
 
 alias dn="dotnet"
 
@@ -15,6 +16,7 @@ alias extip="curl -k -4 ip.sb"
 alias glogin="gcloud auth login --no-launch-browser"
 
 alias gid-klho="git config --global user.email \"ray@kaleho.com\"; git config --global user.name \"Raymond A. Kaleho\""
+alias gid-ups="git config --global user.email \"CW000006922@ups.com\"; git config --global user.name \"Raymond Kaleho\""
 
 alias go-notes="cd /home/user01/onedrive/kaleho/ray-personal/notes/church-notes/2023"
 

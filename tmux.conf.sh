@@ -45,6 +45,7 @@ set -g mouse on
 set-option -g allow-rename off
 
 # retain color in bash, etc.
+set -g default-shell /bin/zsh
 set -g default-terminal "screen-256color"
 
 # use vi keys in buffer

@@ -8,4 +8,4 @@ do
 done;
 unset i
 
-echo "Customizations were loaded."
+# echo "Customizations were loaded."
