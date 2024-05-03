@@ -177,8 +177,8 @@ function install_zsh() {
   sudo apt upgrade -y
   sudo apt install -y zsh
   sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-  git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
-  sed -i '/ZSH_THEME/{s/.*/ZSH_THEME="powerlevel10k/powerlevel10k"/;:a;n;ba}' ~/.zshrc
+  #git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+  #sed -i '/ZSH_THEME/{s/.*/ZSH_THEME="powerlevel10k/powerlevel10k"/;:a;n;ba}' ~/.zshrc
 }
 
 function push() {
