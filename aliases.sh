@@ -13,6 +13,8 @@ alias dn="dotnet"
 
 alias extip="curl -k -4 ip.sb"
 
+alias gprune="git fetch -p && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D"
+
 alias glogin="gcloud auth login --no-launch-browser"
 
 alias gid-klho="git config --global user.email \"ray@kaleho.com\"; git config --global user.name \"Raymond A. Kaleho\""
