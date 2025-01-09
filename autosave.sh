@@ -44,31 +44,29 @@ autosave() {
     # If iterations is empty or 0, run indefinitely
     if [[ -z "$iterations" || "$iterations" -eq 0 ]]; then
         while true; do
+            echo "Iteration $count (Running indefinitely)"
             git_auto_commit_push
             display_countdown 300
+            ((count++))
         done
     else
-        # Run for specified number of iterations
         while [ $count -le "$iterations" ]; do
             echo "Iteration $count of $iterations"
             git_auto_commit_push
             
-            # Don't display countdown on last iteration
+            # Only display countdown if not the last iteration
             if [ $count -lt "$iterations" ]; then
                 display_countdown 300
             fi
-            
             ((count++))
         done
         echo "Completed $iterations iterations. Exiting."
     fi
 }
 
-# Check if argument is provided and is a valid number
+# Main execution
 if [[ $1 =~ ^[0-9]+$ ]]; then
     autosave "$1"
 else
-    # If no argument or invalid argument, run indefinitely
     autosave
 fi
-
