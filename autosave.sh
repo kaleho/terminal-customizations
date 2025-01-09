@@ -7,23 +7,18 @@ git_auto_commit_push() {
         echo "Error: This is not a git repository"
         return 1
     fi
-
     # Check if the working tree is clean
     if [[ -z $(git status -s) ]]; then
         echo "Working tree is clean. Nothing to do."
         return 0
     fi
-
     # Add all changes
     git add .
-
     # Commit changes with a timestamp
     commit_message="Auto-commit: $(date '+%Y-%m-%d %H:%M:%S')"
     git commit -m "$commit_message"
-
     # Push to origin
     git push origin HEAD
-
     echo "Changes have been committed and pushed to origin."
 }
 
@@ -41,14 +36,39 @@ display_countdown() {
 }
 
 autosave() {
-    # Main loop
+    local iterations=$1
+    local count=1
+
     echo "Starting Git Auto Commit Loop. Press Ctrl+C to stop."
-
-    while true; do
-        # Run the git auto-commit-push function
-        git_auto_commit_push
-
-        # Display countdown for 5 minutes (300 seconds)
-        display_countdown 300
-    done
+    
+    # If iterations is empty or 0, run indefinitely
+    if [[ -z "$iterations" || "$iterations" -eq 0 ]]; then
+        while true; do
+            git_auto_commit_push
+            display_countdown 300
+        done
+    else
+        # Run for specified number of iterations
+        while [ $count -le "$iterations" ]; do
+            echo "Iteration $count of $iterations"
+            git_auto_commit_push
+            
+            # Don't display countdown on last iteration
+            if [ $count -lt "$iterations" ]; then
+                display_countdown 300
+            fi
+            
+            ((count++))
+        done
+        echo "Completed $iterations iterations. Exiting."
+    fi
 }
+
+# Check if argument is provided and is a valid number
+if [[ $1 =~ ^[0-9]+$ ]]; then
+    autosave "$1"
+else
+    # If no argument or invalid argument, run indefinitely
+    autosave
+fi
+
