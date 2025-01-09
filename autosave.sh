@@ -3,23 +3,26 @@
 # Function to perform git operations
 git_auto_commit_push() {
     # Check if we're in a git repository
-    if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+    git rev-parse --is-inside-work-tree > /dev/null 2>&1
+    if [ $? -ne 0 ]; then
         echo "Error: This is not a git repository"
         return 1
     fi
-    # Check if the working tree is clean
-    if [[ -z $(git status -s) ]]; then
-        echo "Working tree is clean. Nothing to do."
-        return 0
-    fi
+    
     # Add all changes
     git add .
-    # Commit changes with a timestamp
-    commit_message="Auto-commit: $(date '+%Y-%m-%d %H:%M:%S')"
-    git commit -m "$commit_message"
-    # Push to origin
-    git push origin HEAD
-    echo "Changes have been committed and pushed to origin."
+    
+    # Check if there are changes to commit
+    if [ -z "$(git status -s)" ]; then
+        echo "Working tree is clean. No changes to commit."
+    else
+        # Commit changes with a timestamp
+        commit_message="Auto-commit: $(date '+%Y-%m-%d %H:%M:%S')"
+        git commit -m "$commit_message"
+        # Push to origin
+        git push origin HEAD
+        echo "Changes have been committed and pushed to origin."
+    fi
 }
 
 # Function to display countdown
@@ -42,7 +45,7 @@ autosave() {
     echo "Starting Git Auto Commit Loop. Press Ctrl+C to stop."
     
     # If iterations is empty or 0, run indefinitely
-    if [[ -z "$iterations" || "$iterations" -eq 0 ]]; then
+    if [ -z "$iterations" ] || [ "$iterations" -eq 0 ]; then
         while true; do
             echo "Iteration $count (Running indefinitely)"
             git_auto_commit_push
@@ -63,10 +66,3 @@ autosave() {
         echo "Completed $iterations iterations. Exiting."
     fi
 }
-
-# Main execution
-if [[ $1 =~ ^[0-9]+$ ]]; then
-    autosave "$1"
-else
-    autosave
-fi
