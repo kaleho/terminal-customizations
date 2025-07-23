@@ -2,7 +2,7 @@ if [[ -z "$CUSTOM" ]]; then
     CUSTOM="$HOME/customizations"
 fi
 
-for i in $(find "$CUSTOM" -type f -name "*.sh")
+for i in $(find -L "$CUSTOM" -type f -name "*.sh")
 do
   source "$i";
 done;
