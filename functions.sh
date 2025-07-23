@@ -97,8 +97,8 @@ function devfix() {
 function devup() {
   srt
 
-  # ~/.roaming-terminal/roam "--restart unless-stopped --network host -v /mnt:/mnt" dev
-  ~/.roaming-terminal/roam "--restart unless-stopped -p 11022:11022 -v /mnt:/mnt" dev
+  ~/.roaming-terminal/roam "--restart unless-stopped --network host -v /mnt:/mnt" dev
+  #~/.roaming-terminal/roam "--restart unless-stopped -p 11022:11022 -v /mnt:/mnt" dev
   
   # Run the following commands as the root user (-u 0)
 
@@ -170,6 +170,15 @@ function github_install_zip() {
 
 function install_stripe() {
   github_install_tar "/usr/local/bin" "stripe/stripe-cli" $(echo "linux_x86_64.tar.gz$")
+}
+
+function install_zsh() {
+  sudo apt update
+  sudo apt upgrade -y
+  sudo apt install -y zsh
+  sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  #git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+  #sed -i '/ZSH_THEME/{s/.*/ZSH_THEME="powerlevel10k/powerlevel10k"/;:a;n;ba}' ~/.zshrc
 }
 
 function push() {
