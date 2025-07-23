@@ -4,6 +4,8 @@ alias azas="az account show"
 alias azl="az login --use-device-code && az account show"
 alias azll="az logout && az login --use-device-code && az account show"
 
+alias cld="claude --dangerously-skip-permissions"
+
 alias d="docker"
 alias de="docker exec -it"
 alias dl="docker exec -it $(echo $USER)_dev zsh"
