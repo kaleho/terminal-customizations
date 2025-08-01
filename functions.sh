@@ -181,6 +181,12 @@ function install_zsh() {
   #sed -i '/ZSH_THEME/{s/.*/ZSH_THEME="powerlevel10k/powerlevel10k"/;:a;n;ba}' ~/.zshrc
 }
 
+function killp() {
+  for port in "$@"; do
+    lsof -ti:"$port" | xargs -r kill -9
+  done
+}
+
 function push() {
   # This is a push only, do not delete anything from the target
   rsync -avz .bash_aliases .tmux .roaming-terminal customizations --exclude='**/.git/' $1:.
