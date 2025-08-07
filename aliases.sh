@@ -49,7 +49,8 @@ alias rsn="rsync -avzh -n --delete"
 alias sst="sudo service ssh start && sudo netstat -tlnp | grep 22"
 alias ssp="sudo service ssh stop && sudo netstat -tlnp | grep 22"
 
-alias tma="tmux attach-session -t "
+alias tma="tmux attach-session -t"
+alias tml="tmux list-sessions"
 
 alias tf="terraform"
 alias tfa="terraform apply"
