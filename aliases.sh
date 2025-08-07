@@ -6,6 +6,8 @@ alias azll="az logout && az login --use-device-code && az account show"
 
 alias cld="claude --dangerously-skip-permissions"
 
+alias cfi="npx --y claude-flow@alpha init --force"
+
 alias d="docker"
 alias de="docker exec -it"
 alias dl="docker exec -it $(echo $USER)_dev zsh"
@@ -47,7 +49,7 @@ alias rsn="rsync -avzh -n --delete"
 alias sst="sudo service ssh start && sudo netstat -tlnp | grep 22"
 alias ssp="sudo service ssh stop && sudo netstat -tlnp | grep 22"
 
-alias tma="tmux attach-session -t 0"
+alias tma="tmux attach-session -t "
 
 alias tf="terraform"
 alias tfa="terraform apply"
